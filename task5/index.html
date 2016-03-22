@@ -11,8 +11,8 @@
 		line-height: 1.5;
 	}
 	body{
+		min-width: 850px;
 		background: #ddd;
-		min-width: 600px;
 	}
 	/*头部*/
 	header{
@@ -33,6 +33,11 @@
 	}
 	header ul li:nth-child(odd) a{
 		color: #cec;
+	}
+	header:after{
+		content: '';
+		display: block;
+		clear: both;
 	}
 
 	/*正文*/
@@ -67,6 +72,7 @@
 	}
 
 	/*另一篇文章*/
+
 	#article2 ul{
 		margin-left: 20px;
 		list-style: none;
@@ -79,6 +85,7 @@
 		border: 1px solid #ccc;
 		box-shadow: 2px 2px #ccc;
 		padding: 10px;
+		display: inline-block;
 	}
 	#article3 img{
 		height: 50px;
@@ -117,7 +124,16 @@
 		background: #aaa;
 	}
 
+	article{
+		margin-right: 420px;
+	}
+
 	/*侧栏*/
+	aside{
+		width: 360px;
+		float: right;
+
+	}
 	aside h2{
 		padding-left: 15px;
 		border-left: 45px solid #bbb;
@@ -187,8 +203,69 @@
 			</li>
 		</ul>
 	</header>
+
+	<!-- 侧栏 -->
+	<aside>
+		<h2>这里是侧栏的标题</h2>
+		
+		<form>
+			<table border="0">
+				<tr>
+					<td>请输入邮箱地址：</td>
+					<td><input type="text" placeholder="这里是一个文本输入框"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="notice">邮箱地址请按格式输入</td>
+				</tr>
+				<tr>
+					<td>请输入密码：</td>
+					<td><input type="password" placeholder="******"></td>
+				</tr>
+				<tr>
+					<td>请重复输入密码：</td>
+					<td><input type="password" placeholder="******"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="notice">密码请为6-16位数字</td>
+				</tr>
+				<tr>
+					<td>性别：</td>
+					<td>
+						<input type="radio" checked="checked" name="Sex" value="male">男
+						<input type="radio" checked="checked" name="Sex" value="male">女
+					</td>
+				</tr>
+				<tr>
+					<td>城市：</td>
+					<td>
+						<select name="city" >
+							<option value="sh">上海</option>
+							<option value="bj">北京</option>
+							<option value="sz">深圳</option>
+							<option value="am">澳门</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>爱好：</td>
+					<td><input type="checkbox">运动<input type="checkbox">艺术<input type="checkbox">科学</td>
+				</tr>
+				<tr>
+					<td>个人描述：</td>
+					<td><textarea name="intro" cols="20" rows="2"></textarea></td>
+				</tr>
+			</table>
+			<input type="button" value="确认提交">
+		</form>
+	</aside>
+
+	
 	<!-- 正文 -->
 	<article>
+
+
 		<!-- 文章一 -->
 		<section id="article1">
 			<h1>文章一级标题</h1>
@@ -319,63 +396,11 @@
 					</tr>
 				</table>
 		</section>
+
+
+
 	</article>
-	<!-- 侧栏 -->
-	<aside>
-		<h2>这里是侧栏的标题</h2>
-		
-		<form>
-			<table border="0">
-				<tr>
-					<td>请输入邮箱地址：</td>
-					<td><input type="text" placeholder="这里是一个文本输入框"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td class="notice">邮箱地址请按格式输入</td>
-				</tr>
-				<tr>
-					<td>请输入密码：</td>
-					<td><input type="password" placeholder="******"></td>
-				</tr>
-				<tr>
-					<td>请重复输入密码：</td>
-					<td><input type="password" placeholder="******"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td class="notice">密码请为6-16位数字</td>
-				</tr>
-				<tr>
-					<td>性别：</td>
-					<td>
-						<input type="radio" checked="checked" name="Sex" value="male">男
-						<input type="radio" checked="checked" name="Sex" value="male">女
-					</td>
-				</tr>
-				<tr>
-					<td>城市：</td>
-					<td>
-						<select name="city" >
-							<option value="sh">上海</option>
-							<option value="bj">北京</option>
-							<option value="sz">深圳</option>
-							<option value="am">澳门</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>爱好：</td>
-					<td><input type="checkbox">运动<input type="checkbox">艺术<input type="checkbox">科学</td>
-				</tr>
-				<tr>
-					<td>个人描述：</td>
-					<td><textarea name="intro" cols="20" rows="2"></textarea></td>
-				</tr>
-			</table>
-			<input type="button" value="确认提交">
-		</form>
-	</aside>
+	
 	<!-- 尾部 -->
 	<footer>
 		版权所有©
