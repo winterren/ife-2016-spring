@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task20</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+		font-family: "Microsoft Yahei";
+		color: #444;
+		font-size: 20px;
+	}
+	form{
+		padding: 5px;
+	}
+	input, textarea{
+		vertical-align: top;
+		padding: 2px;
+		border: 2px solid #444;
+		height: 30px;
+		box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		-webkit-box-sizing: content-box;
+		font-size: 15px;
+	}
+
+	ul,li{
+		list-style: none;
+	}
+	li{
+		display: inline-block;
+		padding: 5px;
+		margin: 5px;
+		background: #ccc;
+		border: 2px solid #444;
+	}
+	li:hover{
+		cursor: pointer;
+	}
+	</style>
+</head>
+<body>
+	<form>
+		<textarea id="input_text">蛤蛤 华莱士，搞个大新闻、   拿衣服</textarea>
+		<input type="button" class="btn" value="左侧入">
+		<input type="button" class="btn" value="右侧入">
+		<input type="button" class="btn" value="左侧出">
+		<input type="button" class="btn" value="右侧出">
+		<input type="text" id="query_text" value="衣服">
+		<input type="button" class="btn" value="查询">
+	</form>
+	<ul id="output_text"></ul>
+	<script>
+	var inputText = document.getElementById('input_text');
+	var outputUl = document.getElementById('output_text');
+	var btn = document.getElementsByClassName('btn');
+
+	function verify(){
+		if (inputText.value==""){
+			alert("请输入数据");
+			return 0;
+		}
+	}
+
+	function additem(str){
+		var arr = inputText.value.split(/[\s、,，]+/);
+		// 将目前的数据暂时存放进tempLi
+		
+		arr.forEach(function(e){
+			var tempText = document.createTextNode(e);
+			var tempLi = document.createElement('li');
+			addEventDel(tempLi);
+			tempLi.appendChild(tempText);
+			switch (str){
+				case "leftIn":
+					// 存放进第一个节点insertbefore
+					outputUl.insertBefore(tempLi, outputUl.firstChild);
+					break;
+				case "rightIn":
+					// 存放进最后一个节点appendchild
+					outputUl.appendChild(tempLi);
+					break;
+			}
+		})	
+	}
+
+	function query(){
+		var queryText = document.getElementById('query_text').value;
+		var reg = new RegExp(queryText) ;
+		// 格式重置
+		for(var i = 0 ; i < outputUl.childNodes.length ; i++){
+				outputUl.childNodes[i].style.backgroundColor = "#ccc";
+		}
+		// 检查数据是否合法
+		if ((/[\s、,，]+/).test(queryText)){
+			return 0;
+		}
+		// 找到匹配项渲染
+		for(var i = 0 ; i < outputUl.childNodes.length ; i++){
+			if(reg.test(outputUl.childNodes[i].innerText)){
+				outputUl.childNodes[i].style.backgroundColor = "#fcc";
+			}
+
+		}
+	}
+
+	// 四个按钮的基本操作
+	function operateBtn(str){
+		switch (str){
+			case "leftIn":
+			case "rightIn":
+				// 检查数字有效性
+				if (verify()==0){
+					return 0;
+				}
+				additem(str);
+				break;
+			case "leftOut":
+				// 校验队列是否空
+				if (!outputUl.hasChildNodes()){
+					alert("没有节点可以删除");
+					return 0;
+				}
+				// 找到第一个子Li
+				var temp = outputUl.firstChild;
+				alert(temp.innerText);
+				outputUl.removeChild(temp);
+				break;
+			case "rightOut":
+				// 校验队列是否空
+				if (!outputUl.hasChildNodes()){
+					alert("没有节点可以删除");
+					return 0;
+				}
+				// 找到最后一个子Li
+				var temp = outputUl.childNodes[outputUl.childNodes.length-1];
+				alert(temp.innerText);
+				outputUl.removeChild(temp);
+				break;
+			case "query":
+				query();
+			default:
+		}
+	}
+
+
+	// 在每添加一个li时绑定他的删除事件
+	function addEventDel(e){
+		e.addEventListener('click',function(){
+			e.parentNode.removeChild(e);
+		})
+	}
+
+	// 绑定按钮事件
+	var oprArr = ['leftIn','rightIn','leftOut','rightOut',"query"];
+	for(var i=0; i<5; i++){
+		// for的闭包
+		(function (){
+			var temp=i;
+			// addEventListener的闭包
+			btn[temp].addEventListener('click',function(){
+				return operateBtn(oprArr[temp]);
+			});
+		})(i);
+	}
+
+	</script>
+</body>
+</html>
